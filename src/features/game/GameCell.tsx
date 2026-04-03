@@ -8,6 +8,11 @@ interface GameCellProps {
   onClick: (index: number) => void
 }
 
+const cellStyle: Record<NonNullable<Cell>, string> = {
+  X: 'bg-indigo-900 text-indigo-300 border-2 border-indigo-500',
+  O: 'bg-rose-900 text-rose-300 border-2 border-rose-500',
+}
+
 export function GameCell({ value, index, isWinning, disabled, onClick }: GameCellProps) {
   return (
     <button
@@ -18,10 +23,10 @@ export function GameCell({ value, index, isWinning, disabled, onClick }: GameCel
         'w-24 h-24 text-4xl font-bold rounded-xl',
         'transition-all duration-150',
         isWinning
-          ? 'bg-yellow-400 text-white scale-105'
+          ? 'bg-yellow-400 text-white scale-105 border-2 border-yellow-300'
           : value
-            ? 'bg-slate-700 text-white cursor-default'
-            : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white cursor-pointer',
+            ? cellStyle[value]
+            : 'bg-slate-800 text-slate-400 border-2 border-slate-700 hover:bg-slate-700 hover:text-white hover:border-slate-500 cursor-pointer',
         disabled && value === null ? 'opacity-40 cursor-not-allowed' : '',
       ]
         .filter(Boolean)
