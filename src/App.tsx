@@ -1,10 +1,12 @@
 import { useGame } from '@/features/game/useGame'
+import { useConfetti } from '@/features/game/useConfetti'
 import { GameBoard } from '@/features/game/GameBoard'
 import { GameStatus } from '@/features/game/GameStatus'
 import { Button } from '@/components/ui/Button'
 
 export default function App() {
   const { board, status, makeMove, resetGame } = useGame()
+  useConfetti(status)
 
   return (
     <main className="min-h-screen bg-slate-900 flex items-center justify-center">
