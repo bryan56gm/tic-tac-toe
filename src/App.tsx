@@ -22,9 +22,14 @@ export default function App() {
 
         <GameBoard board={board} status={status} onMove={makeMove} />
 
-        <Button onClick={resetGame} variant={status.type !== 'playing' ? 'primary' : 'ghost'}>
-          Nueva partida
-        </Button>
+        <div className="flex gap-3">
+          <Button onClick={resetGame} variant="primary">
+            Nueva partida
+          </Button>
+          <Button onClick={resetGame} variant="danger">
+            Reiniciar
+          </Button>
+        </div>
       </div>
     </main>
   )
