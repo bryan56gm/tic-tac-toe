@@ -1,11 +1,14 @@
 import { useGame } from '@/features/game/useGame'
 import { useConfetti } from '@/features/game/useConfetti'
+import { usePlayerNames } from '@/features/game/usePlayerNames'
 import { GameBoard } from '@/features/game/GameBoard'
 import { GameStatus } from '@/features/game/GameStatus'
+import { PlayerNames } from '@/features/game/PlayerNames'
 import { Button } from '@/components/ui/Button'
 
 export default function App() {
   const { board, status, makeMove, resetGame } = useGame()
+  const { names, setName } = usePlayerNames()
   useConfetti(status)
 
   return (
@@ -13,12 +16,9 @@ export default function App() {
       <div className="flex flex-col items-center gap-8">
         <h1 className="text-3xl font-bold text-white tracking-tight">Tres en Raya</h1>
 
-        <div className="flex gap-6 text-sm font-semibold">
-          <span className="text-indigo-400">X — Jugador 1</span>
-          <span className="text-rose-400">O — Jugador 2</span>
-        </div>
+        <PlayerNames names={names} onSetName={setName} />
 
-        <GameStatus status={status} />
+        <GameStatus status={status} names={names} />
 
         <GameBoard board={board} status={status} onMove={makeMove} />
 
