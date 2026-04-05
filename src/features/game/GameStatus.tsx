@@ -1,7 +1,9 @@
 import type { GameStatus as TGameStatus } from '@/types'
+import type { PlayerNames } from './usePlayerNames'
 
 interface GameStatusProps {
   status: TGameStatus
+  names: PlayerNames
 }
 
 const playerColor: Record<'X' | 'O', string> = {
@@ -14,11 +16,11 @@ const playerDot: Record<'X' | 'O', string> = {
   O: 'bg-rose-400',
 }
 
-export function GameStatus({ status }: GameStatusProps) {
+export function GameStatus({ status, names }: GameStatusProps) {
   if (status.type === 'won') {
     return (
-      <p className="text-2xl font-bold text-yellow-400 animate-bounce">
-        🏆 Jugador {status.winner} gana!
+      <p className={`text-2xl font-bold animate-bounce ${playerColor[status.winner]}`}>
+        🏆 {names[status.winner]} gana!
       </p>
     )
   }
@@ -33,9 +35,9 @@ export function GameStatus({ status }: GameStatusProps) {
         className={`w-2.5 h-2.5 rounded-full animate-pulse ${playerDot[status.currentPlayer]}`}
       />
       <span>
-        Turno del jugador{' '}
+        Turno de{' '}
         <span className={`font-bold ${playerColor[status.currentPlayer]}`}>
-          {status.currentPlayer}
+          {names[status.currentPlayer]}
         </span>
       </span>
     </div>
